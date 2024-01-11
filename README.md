@@ -21,8 +21,8 @@ Nombre |   Email
 
 - **`BitTorrent`**: Contiene las estructuras y componentes esenciales del cliente BitTorrent. Aquí encontrarás la implementación de los algoritmos y lógica central del protocolo.
 - **`TrackerTorrent`**: Contiene las funcionalidades relacionadas con el tracker. El tracker es responsable de coordinar la comunicación entre los clientes, facilitando la búsqueda y el intercambio de información sobre los archivos disponibles.
-- **`Documentation`**: Contiene los diagramas y el informe del proyecto.
+- **`Documentation`**: Contiene la documentación del trabajo, los diagramas de clase del Cliente y el informe del proyecto.
 
 ## Documentación
 
-* [Documentacion general del proyecto]()
+* [Documentacion general del proyecto](https://github.com/DanteReinaudo/RustTorrent/blob/main/Documentation/doc/INFORME%20-%20BITTORRENT.pdf)
