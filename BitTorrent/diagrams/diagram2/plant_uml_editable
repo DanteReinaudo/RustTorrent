@@ -1,0 +1,39 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+title El programa recibe un .torrent, se conecta al Tracker y obtiene la lista de peers. Luego el cliente genera una conexion con los Peers devuelto.
+
+Actor Actor
+Participant BitTorrentProgram as ":Bit Torrent Program"
+Participant BTClient as ":BT Client"
+
+Participant TrackerRequest as ":TrackerRequest"
+Participant TrackerResponse as ":TrackerResponse"
+Participant Peer as ":Peer"
+Participant Handshake as ":Handshake"
+
+
+
+
+Actor -> BitTorrentProgram: .torrent file
+BitTorrentProgram -> BTClient ++: decode_torrent_file(torrent_path)
+BTClient -> BTClient: decoded_torrent...
+BTClient -> TrackerRequest ++: announce_to_tracker()
+TrackerRequest -> TrackerResponse ++: announce() 
+ note right: El BitClient hace uso de la estructura TrackerRequest para oredenar y modelar los campos a enviar al Tracker.\n Con la misma hacemos el announce, recibiendo la respuesta y almacenandola en la estructura TrackerResponse. 
+TrackerRequest--
+TrackerResponse --> BTClient --: TrackerResponse
+
+
+loop recorro la lista de peers enviada por el Tracker 
+          BTClient -> Peer ++: 
+          Peer --> BTClient: unPeer
+          note right: El Cliente instancia estructuras Peer y Handshake por cada uno que esta en la lista\n devuelta por el Tracker obteniendo una conexion TCP 
+
+
+          BTClient -> Handshake ++: attempt_handshake(Peer)
+          Handshake --> BTClient --: TcpStream
+
+
+     end
+@enduml
